@@ -1,0 +1,13 @@
+
+- Lo que quieren es contrastar las diferencias entre unidades en mismos proyectos. Analizar específicamente el "cpk" de las unidades y comparar para saber cuál es el los aspectos específicos que no son rentables. 
+- Quieren que analicemos el cobro de cada unidad en cada proyecto. 
+- Para poder llegar a el análisis de rentabilidad, se tiene que hacer dentro de la misma flota. 
+- Necesitamos más información de los seguros por cada unidad. 
+- Necesitamos que nos proporcionen los datos de mantenimiento. 
+- Nos ayudaría saber cuanto cuesta cada accidente y comparar por proyectos. 
+- Sugieren trabajar el cálculo del CPK de manera separada para no tener problema con las fechas. 
+- No necesariamente hay gastos de mantenimiento cada mes.
+- El rendimiento más alto de combustible es de 3.7
+- Liverpool y esos proyectos mueven mercancía a través de la ciudad. A esto le llaman rutas locales. Y esto ocasiona que el gasto de combustible se dispare por el tráfico y el tiempo en que la unidad está para con el motor encendido.
+- Dicen que tienen anomalías gracias a la "sustracción de combustible". Aún así, es demasiado los litros en comparación de los kilómetros recorridos. 
+- No hay datos reportados de abastecimiento o faltan en muchos meses. 

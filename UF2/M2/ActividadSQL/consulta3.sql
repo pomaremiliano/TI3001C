@@ -1,0 +1,1 @@
+SELECT CustomerName, Address, City FROM Customers WHERE City IN ("Berlin", "London", "Lisboa", "Madrid");
