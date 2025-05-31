@@ -1,0 +1,57 @@
+## RESUMEN DE DATOS
+
+'id': un identificador único para cada registro de datos.
+
+'customer_id': un identificador para cada cliente, que le permite asociar varios registros con el mismo individuo.
+
+'month': El mes del registro de datos, indicando cuándo se recopilaron los datos o si son relevantes.
+
+'name': El nombre del cliente, que puede utilizarse con fines de identificación.
+
+'age': La edad del cliente, proporcionando información sobre su edad demográfica.
+
+'ssn': El Número de Seguro Social (SSN) del cliente, un identificador único utilizado para la verificación.
+
+'occupation': La ocupación o profesión del cliente, que puede ayudar a comprender su situación laboral.
+
+'annual_income': El ingreso anual del cliente, un parámetro financiero crucial.
+
+'monthly_inhand_salary': el salario o ingreso mensual disponible para el cliente después de las deducciones.
+
+'num_bank_accounts': El número de cuentas bancarias que posee el cliente, indicando su actividad bancaria.
+
+'num_credit_card': el número de tarjetas de crédito que posee el cliente, lo que refleja su uso de crédito.
+
+'interest_rate': La tasa de interés asociada a los productos financieros del cliente, como préstamos o tarjetas de crédito.
+
+'num_of_loan': el número de préstamos que tiene el cliente, lo que proporciona información sobre sus obligaciones de deuda.
+
+'type_of_loan': Los tipos de préstamos que tiene el cliente, que pueden incluir hipotecas, préstamos personales, etc.
+
+'delay_from_due_date': El retraso en el pago desde la fecha de vencimiento de préstamos o tarjetas de crédito, indicando su comportamiento de pago.
+
+'num_of_delayed_paid': el número de pagos retrasados realizados por el cliente.
+
+'changed_credit_limit': cambios en el límite de crédito del cliente, que pueden afectar su utilización de crédito.
+
+'num_credit_inquiries': la cantidad de consultas de crédito realizadas por el cliente, que pueden afectar su puntaje crediticio.
+
+'credit_mix': la composición de las cuentas de crédito del cliente, que puede afectar su perfil crediticio.
+
+'outstanding_debt': El importe de la deuda pendiente adeudada por el cliente.
+
+'credit_utilization_ratio': la relación entre el crédito utilizado y el crédito total disponible, un factor clave en la calificación crediticia.
+
+'credit_history_age': la antigüedad del historial crediticio del cliente, que influye en su solvencia.
+
+'pago_of_min_amount': Cómo manejan los clientes el monto mínimo de pago en tarjetas de crédito o préstamos.
+
+'total_emi_per_month': el total de pagos de cuotas mensuales equivalentes (EMI) realizados por el cliente.
+
+'amount_invested_monthly': El monto que el cliente invierte mensualmente, si corresponde.
+
+'Payment_behaviour': El comportamiento del cliente con respecto a sus pagos, reflejando su responsabilidad financiera.
+
+'balance_mensual': El saldo mensual en las cuentas financieras del cliente.
+
+'credit_score': la variable objetivo que representa la puntuación crediticia del cliente, que pretendemos predecir. Esta columna es el objetivo. Hay tres valores; Estándar, pobre, bueno. Serán reemplazados como Deficiente --> 0, Bueno --> 1, Estándar --> 2
