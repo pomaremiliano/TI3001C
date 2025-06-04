@@ -155,15 +155,23 @@ app.layout = html.Div(
             [
                 html.Div(
                     [
+                        html.H2("Gráfica 1: Edad vs Salario"),
                         dcc.Graph(figure=fig1, style={"height": "350px"}),
+                        dcc.Markdown("La mayoría de los empleados se concentran entre los 33 y 50 años, con salarios que oscilan principalmente entre $45,000 y $75,000 pesos. Aunque existe dispersión, solo unos pocos empleados mayores de 40 años superan los $150,000 pesos, lo que sugiere que los salarios más altos no son comunes ni garantizados con la edad."),
+                        html.H2("Gráfica 2: Salarios por Departamento"),
                         dcc.Graph(figure=fig2, style={"height": "350px"}),
+                        dcc.Markdown("El departamento de IT/IS presenta la mayor variabilidad salarial, con varios empleados superando los $150,000 pesos. En contraste, Production y Sales concentran la mayoría de sus salarios entre $50,000 y $70,000 pesos. Software Engineering y Admin Offices muestran una menor dispersión, con salarios más concentrados en rangos medios-altos."),
                     ],
                     style={"flex": "1", "padding": "10px"},
                 ),
                 html.Div(
                     [
+                        html.H2("Gráfica 3: Distribución de Edades por Género"),
                         dcc.Graph(figure=fig3, style={"height": "350px"}),
+                        dcc.Markdown("La mayoría de empleados nació entre 1980 y 1990, con picos alrededor de 1984 y 1986. No se observan grandes diferencias de edad entre géneros, aunque en los nacimientos posteriores a 1990 predominan mujeres."),
+                        html.H2("Gráfica 4: Ausencias por Género"),
                         dcc.Graph(figure=fig4, style={"height": "350px"}),
+                        dcc.Markdown("Tanto hombres como mujeres presentan una amplia dispersión en el número de ausencias, con valores similares. Sin embargo, el rango intercuartílico es ligeramente mayor en mujeres, lo que sugiere una mayor variabilidad en sus ausencias."),
                     ],
                     style={"flex": "1", "padding": "10px"},
                 ),
@@ -183,15 +191,23 @@ app.layout = html.Div(
             [
                 html.Div(
                     [
+                        html.H2("Gráfica 5: Satisfacción por Fuente de Reclutamiento"),
                         dcc.Graph(figure=fig5, style={"height": "350px"}),
+                        dcc.Markdown("La fuente “On-line Web application” destaca con una satisfacción promedio de 5, la más alta entre todas. En cambio, fuentes como “Other” y “Website” presentan los niveles más bajos, por debajo de 3.6."),
+                        html.H2("Gráfica 6: Distribución de Salarios"),
                         dcc.Graph(figure=fig6, style={"height": "350px"}),
+                        dcc.Markdown("La mayoría de los empleados percibe salarios entre $50,000 y $70,000 pesos. A partir de los $100,000, la frecuencia disminuye considerablemente, y muy pocos alcanzan sueldos superiores a $150,000."),
                     ],
                     style={"flex": "1", "padding": "10px"},
                 ),
                 html.Div(
                     [
+                        html.H2("Gráfica 7: Puntajes de Desempeño"),
                         dcc.Graph(figure=fig7, style={"height": "350px"}),
+                        dcc.Markdown("El 78% de los empleados cumple completamente con las expectativas (“Fully Meets”). Solo un 10.5% supera lo esperado (“Exceeds”) y menos del 12% requiere mejora o está en plan de mejora (“Needs Improvement” y “PIP”)."),
+                        html.H2("Gráfica 8: Despidos por Departamento"),
                         dcc.Graph(figure=fig8, style={"height": "350px"}),
+                        dcc.Markdown("El departamento de Production concentra más del 80% de los despidos registrados, con más de 50 empleados. Los demás departamentos tienen una cantidad mínima en comparación, lo que indica una posible alta rotación o restructuración específica en Production."),
                     ],
                     style={"flex": "1", "padding": "10px"},
                 ),
@@ -207,22 +223,36 @@ app.layout = html.Div(
         ),
         html.Div(
             [
-                dcc.Graph(
-                    figure=fig9,
-                    style={
-                        "height": "350px",
-                        "width": "48%",
-                        "display": "inline-block",
-                        "marginRight": "2%",
-                    },
+                html.Div(
+                    [
+                        html.H2("Gráfica 9: Antigüedad vs Salario"),
+                        dcc.Graph(
+                            figure=fig9,
+                            style={
+                                "height": "350px",
+                                "width": "100%",
+                                "display": "inline-block",
+                                "marginRight": "2%",
+                            },
+                        ),
+                        dcc.Markdown("La gráfica muestra que no existe una relación clara entre mayor antigüedad y mayor salario. La mayoría de los empleados con más de 10 años en la empresa gana entre $50,000 y $75,000 pesos, y solo unos pocos superan los $150,000."),
+                    ],
+                    style={"flex": "1", "padding": "10px"},
                 ),
-                dcc.Graph(
-                    figure=fig10,
-                    style={
-                        "height": "350px",
-                        "width": "48%",
-                        "display": "inline-block",
-                    },
+                html.Div(
+                    [
+                        html.H2("Gráfica 10: Puestos por Género"),
+                        dcc.Graph(
+                            figure=fig10,
+                            style={
+                                "height": "350px",
+                                "width": "100%",
+                                "display": "inline-block",
+                            },
+                        ),
+                        dcc.Markdown("Los puestos de “Production Technician I” y “Production Technician II” concentran la mayor parte del personal, con ligera mayoría femenina. Algunos roles administrativos como “Administrative Assistant” y “Sr. Accountant” son ocupados principalmente por mujeres, mientras que los puestos técnicos están distribuidos de forma más equilibrada."),
+                    ],
+                    style={"flex": "1", "padding": "10px"},
                 ),
             ],
             style={
