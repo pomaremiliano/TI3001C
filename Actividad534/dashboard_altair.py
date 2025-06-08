@@ -51,7 +51,7 @@ st.title("1. Heatmap de componentes del bienestar por región")
 st.altair_chart(graph1, use_container_width=True)
 st.info(
     """
-    - Este heatmap muestra que el componente que más peso tiene en la sensación de bienestar es la economía GDP en la mayoría de las regiones. Igualmente, para muchas regiones, la familia parece ser más importante que los demás componentes, incluso la Salud. Y además, lo que menos tiene peso en cualquiera de los países es la confianza en el gobierno por su corrupción. Probablemente esto lo vemos claro en México y otros países tercermundistas donde hay mucha corrupción que es parte de la cultura y la gente no confía en el gobierno. Pero eso no significa que la gente no sea feliz, sino que la gente se adapta a las circunstancias y busca su bienestar en otros aspectos como la familia, la economía y la salud.
+    - Este heatmap muestra que el componente que más peso tiene en la sensación de bienestar es la economía GDP en la mayoría de las regiones. Igualmente, para muchas regiones, la familia parece ser más importante que los demás componentes, incluso la Salud. Y además, lo que menos tiene peso en cualquiera de los países es la confianza en el gobierno por su corrupción. Probablemente esto lo vemos claro en México y otros países tercermundistas donde hay mucha corrupción que es parte de la cultura y la gente no confía en el gobierno. Pero eso no significa que la gente no sea feliz, sino que la gente se adapta a las circunstancias y busca su bienestar en otros aspectos como la familia, la economía y la salud. Aquí utilicé la escala de azules de la paleta de cinépolis porque creo que se puede jugar más fácilmente con los tonos de azul para mostrar diferentes niveles de valores.
     """
 )
 
@@ -76,7 +76,7 @@ graph2 = (
 st.title("2. Bubble chart de la Libertad contra la corrupción y la confianza con el gobierno")
 st.altair_chart(graph2, use_container_width=True)
 st.info(
-    "- Esta gráfica de burbujas muestra que hay una relación positiva entre la libertad y la confianza en el gobierno, así como un tamaño de burbuja que indica el puntaje de felicidad de cada país. Los países con mayor libertad tienden a tener una mayor confianza en el gobierno y, en general, un mayor puntaje de felicidad."
+    "- Esta gráfica de burbujas muestra que hay una relación positiva entre la libertad y la confianza en el gobierno, así como un tamaño de burbuja que indica el puntaje de felicidad de cada país. Los países con mayor libertad tienden a tener una mayor confianza en el gobierno y, en general, un mayor puntaje de felicidad. Aquí debo admitir que me faltaron más colores, porque en esta gráfica si se presta a que cada region tenga un color diferente de burbuja. Aún así creo que se ve bien con los colores de la paleta de cinépolis, ya que el azul es un color que transmite confianza y seguridad, lo cual es importante en este tipo de gráficas. Además, el amarillo resalta las burbujas más grandes, lo que ayuda a identificar los países con mayor puntaje de felicidad."
 )
 
 graph3 = (
@@ -88,7 +88,7 @@ graph3 = (
 st.title("3. Gráfica de dispersión entre Happiness Rank y Happiness Score")
 st.altair_chart(graph3, use_container_width=True)
 st.info(
-    """- Este mapa de dispersión es muy obvio. La relación entre el ranking y el score se ve gradualmente. Pero fue interesante ver si había alguna caída abrupta entre algun país a otro, pero la verdad es que no. Se ve muy consistente la relación entre el ranking y el score. Los países con un puntaje más alto tienden a tener un ranking más bajo, lo que indica que son considerados más felices. Por otro lado, los países con un puntaje más bajo tienden a tener un ranking más alto, lo que indica que son considerados menos felices.
+    """- Este mapa de dispersión es muy obvio. La relación entre el ranking y el score se ve gradualmente. Pero fue interesante ver si había alguna caída abrupta entre algun país a otro, pero la verdad es que no. Se ve muy consistente la relación entre el ranking y el score. Los países con un puntaje más alto tienden a tener un ranking más bajo, lo que indica que son considerados más felices. Por otro lado, los países con un puntaje más bajo tienden a tener un ranking más alto, lo que indica que son considerados menos felices. Esta gráfica se presta a que solo tenga un color, en este cado utilicé el amarillo de la paleta de cinépolis, ya que es un color que resalta y ayuda a identificar los puntos en la gráfica. Además, el amarillo es un color que transmite felicidad y optimismo, lo cual es apropiado para esta gráfica que trata sobre la felicidad de los países.
     """
 )
 
@@ -103,8 +103,16 @@ graph4 = (
 st.title("4. Gráfica de línea de happiness score por país")
 st.altair_chart(graph4, use_container_width=True)
 st.info(
-    """- Este gráfico de líneas muestra que de manera visual que tan alto es el índice de felicidad en cada país. Poco se puede conlcuír de esto más que la tendencia general de que los países más desarrollados tienden a tener un mayor índice de felicidad."""
+    """- Este gráfico de líneas muestra que de manera visual que tan alto es el índice de felicidad en cada país. Poco se puede conlcuír de esto más que la tendencia general de que los países más desarrollados tienden a tener un mayor índice de felicidad. Utilicé el azul claro para las líneas y los puntos de azul obscuro. En este caso creo que no se necesita más que un color suave a la vista para que no distraiga de la tendencia general de la gráfica. """
 )
+
+# Definir los umbrales para alto, medio y bajo
+bins = [df["Trust (Government Corruption)"].min(), 0.2, 0.4, df["Trust (Government Corruption)"].max()]
+labels = ["Bajo", "Medio", "Alto"]
+
+df["Corrupción Nivel"] = pd.cut(df["Trust (Government Corruption)"], bins=bins, labels=labels, include_lowest=True)
+
+color_map = {"Bajo": colors[2], "Medio": colors[0], "Alto": colors[1]}
 
 graph5 = (
     alt.Chart(df)
@@ -112,15 +120,15 @@ graph5 = (
     .encode(
         x=alt.X("Country:N", sort="-y", title="País"),
         y=alt.Y("Trust (Government Corruption):Q", title="Corrupción de Gobierno"),
-        color=alt.Color("Region:N", scale=alt.Scale(range=colors), title="Región"),
-        tooltip=["Country", "Region", "Trust (Government Corruption)"],
+        color=alt.Color("Corrupción Nivel:N", scale=alt.Scale(domain=list(color_map.keys()), range=list(color_map.values())), title="Nivel de Corrupción"),
+        tooltip=["Country", "Region", "Trust (Government Corruption)", "Corrupción Nivel"],
     )
-    .properties(title="Corrupción de Gobierno por País y Región")
+    .properties(title="Corrupción de Gobierno por País (Alto, Medio, Bajo)")
 )
 st.title("5. Gráfica de la corrupción de cada país")
 st.altair_chart(graph5, use_container_width=True)
 st.info(
-    """- Este gráfico de barras igual tiene a todos los países y muestra el índice de corrupción de cada uno. El tooltip igual indica la región a la que pertenece el país. En este caso, el índice de corrupción no tiene una tendencia clara hacia países desarrollados o subdesarrollados. Están ambas categorías muy dispersas. Lo que sí es que es interesante ver países muy autoritarios como China y Rusia con un índice de corrupción muy bajo. """
+    """- Este gráfico de barras igual tiene a todos los países y muestra el índice de corrupción de cada uno. El tooltip igual indica la región a la que pertenece el país. En este caso, el índice de corrupción no tiene una tendencia clara hacia países desarrollados o subdesarrollados. Están ambas categorías muy dispersas. Lo que sí es que es interesante ver países muy autoritarios como China y Rusia con un índice de corrupción muy bajo. Aquí decidí definir umbrales de alto medio y bajo nivel de corrupción. Y gracias a eso, elegí el verde oliva para los países con bajo nivel de corrupción, el azul para los países con medio nivel de corrupción y el amarillo para los países con alto nivel de corrupción. Esto ayuda a identificar rápidamente los niveles de corrupción en cada país y a comparar entre ellos. Además, el verde oliva es un color que transmite estabilidad y confianza, lo cual es apropiado para este tipo de gráficas que tratan sobre la corrupción en los gobiernos."""
 )
 
 graph6 = (
@@ -137,7 +145,7 @@ graph6 = (
 st.title("6. Gráfico de dispersión entre la felicidad y la economía GDP per cápita")
 st.altair_chart(graph6, use_container_width=True)
 st.info(
-    """- Lo que se puede observar en el gráfico de dispersión es que simplemente los países con mayor puntaje de felicidad también son los países más prósperos en cuanto a la economía. Más adelante podremos ver cómo se relacionan estos dos factores de manera más detallada."""
+    """- Lo que se puede observar en el gráfico de dispersión es que simplemente los países con mayor puntaje de felicidad también son los países más prósperos en cuanto a la economía. Más adelante podremos ver cómo se relacionan estos dos factores de manera más detallada. Elegí todos los colores de la paleta de cinépolis para los puntos, ya que creo que se ve bien y ayuda a identificar los puntos en la gráfica."""
 )
 
 componentes = ['Economy (GDP per Capita)', 'Family', 'Health (Life Expectancy)', 
@@ -160,7 +168,7 @@ graph7 = (
 st.title("7. Gráfico de pilas de componentes que dan felicidad a los 5 países más felices")
 st.altair_chart(graph7, use_container_width=True)
 st.info(
-    """- Aquí se concentran los 5 países más felices, y podemos ver que la economía es el componente más importante en todos los casos. Sin embargo, la familia y la salud también juegan un papel importante en la felicidad de estos países. Es interesante ver que, a pesar de que la economía es el componente más importante, no es el único factor que contribuye a la felicidad de las personas en estos países. La familia y la salud también son componentes importantes que deben ser considerados al analizar el bienestar de las personas."""
+    """- Aquí se concentran los 5 países más felices, y podemos ver que la economía es el componente más importante en todos los casos. Sin embargo, la familia y la salud también juegan un papel importante en la felicidad de estos países. Es interesante ver que, a pesar de que la economía es el componente más importante, no es el único factor que contribuye a la felicidad de las personas en estos países. La familia y la salud también son componentes importantes que deben ser considerados al analizar el bienestar de las personas. Utilicé los diferentes colores de la paleta de cinépolis para cada componente, lo que ayuda a identificar rápidamente los diferentes componentes que contribuyen a la felicidad en cada país. Además, el uso de colores contrastantes ayuda a resaltar las diferencias entre los componentes y a hacer que la gráfica sea más fácil de entender. """
 )
 # Graph 8 combinada
 # Agregamos un selection point de regiones
@@ -186,7 +194,7 @@ graph_detail = alt.Chart(df).mark_circle(size=100).encode(
 st.title("8. Economía vs Felicidad por País (según Región seleccionada)")
 st.altair_chart((graph_selector & graph_detail).resolve_scale(color='independent'), use_container_width=True)
 st.info(
-    """- Complementando la gráfica de barras de felicidad por país, aquí hay una distribución de los puntajes de felicidad por región. Se puede ver que la región de América del Norte tiene el puntaje más alto, seguida por Europa Occidental y América Latina. Por otro lado, África subsahara y Asia del Sur tienen los puntajes más bajos. Aquí si se puede ver claramente que las regiones más desarrolladas tienden a tener un mayor puntaje de felicidad, mientras que las regiones menos desarrolladas tienden a tener un menor puntaje de felicidad."""
+    """- Complementando la gráfica de barras de felicidad por país, aquí hay una distribución de los puntajes de felicidad por región. Se puede ver que la región de América del Norte tiene el puntaje más alto, seguida por Europa Occidental y América Latina. Por otro lado, África subsahara y Asia del Sur tienen los puntajes más bajos. Aquí si se puede ver claramente que las regiones más desarrolladas tienden a tener un mayor puntaje de felicidad, mientras que las regiones menos desarrolladas tienden a tener un menor puntaje de felicidad. Si faltaron colores porque en ocasiones se repiten para las regiones y los países, pero creo que si se logran identificar en ambas gráficas. A parte cuando das click en una región, se resalta la región seleccionada en ambas gráficas, lo que ayuda a identificar rápidamente los puntajes de felicidad por región."""
 )
 
 st.title("Conclusiones")
